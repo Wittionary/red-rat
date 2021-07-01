@@ -129,5 +129,4 @@ dmypy.json
 .pyre/
 
 # Custom
-poc.ps1
-
+config.json
