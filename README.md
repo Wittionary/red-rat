@@ -4,4 +4,4 @@
 I just watched Ratatouille and alliteration is neato.
 
 ## Requirements
-- Meraki MX with firmware xyz that supports API vSomething
+- go 1.18.1 or higher
