@@ -7,6 +7,8 @@ package cmd
 import (
 	"fmt"
 
+	"cobra-cli/go/src/github.com/wittionary/red-rat/todo"
+
 	"github.com/spf13/cobra"
 )
 
@@ -33,8 +35,10 @@ func init() {
 }
 
 func addRun(cmd *cobra.Command, args []string) {
+	items := []todo.Item{}
+
 	for _, x := range args {
-		fmt.Println(x)
+		items = append(items, todo.Item{Text: x})
 	}
-	//fmt.Println("add called")
+	fmt.Println(items)
 }
