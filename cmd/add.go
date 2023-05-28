@@ -5,9 +5,8 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
-
 	"cobra-cli/go/src/github.com/wittionary/red-rat/todo"
+	"fmt"
 
 	"github.com/spf13/cobra"
 )
@@ -40,5 +39,9 @@ func addRun(cmd *cobra.Command, args []string) {
 	for _, x := range args {
 		items = append(items, todo.Item{Text: x})
 	}
-	fmt.Println(items)
+
+	err := todo.SaveItems("invalidpath!@#???'`/red-rat.json", items)
+	if err != nil {
+		fmt.Errorf("%v", err)
+	}
 }
