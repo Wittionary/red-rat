@@ -7,8 +7,15 @@ package cmd
 import (
 	"os"
 
+	"cobra-cli/go/pkg/mod/github.com/mitchellh/go-homedir@v1.1.0"
+
+	"fmt"
+
+	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 )
+
+var dataFile string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -39,6 +46,12 @@ func init() {
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
 
+	home, err := homedir.Dir()
+	if err != nil {
+		fmt.Println("Unable to detect home directory. Please set data file using --datafile.")
+	}
+
+	rootCmd.PersistentFlags().StringVar(&dataFile, "datafile", home+string(os.PathSeparator)+".red-rat.json", "data file to store todos")
 	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.red-rat.yaml)")
 
 	// Cobra also supports local flags, which will only run

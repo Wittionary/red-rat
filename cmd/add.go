@@ -7,6 +7,7 @@ package cmd
 import (
 	"cobra-cli/go/src/github.com/wittionary/red-rat/todo"
 	"fmt"
+	"log"
 
 	"github.com/spf13/cobra"
 )
@@ -34,13 +35,16 @@ func init() {
 }
 
 func addRun(cmd *cobra.Command, args []string) {
-	items := []todo.Item{}
+	items, err := todo.ReadItems(dataFile)
+	if err != nil {
+		log.Printf("%v", err)
+	}
 
 	for _, x := range args {
 		items = append(items, todo.Item{Text: x})
 	}
 
-	err := todo.SaveItems("invalidpath!@#???'`/red-rat.json", items)
+	err = todo.SaveItems(dataFile, items)
 	if err != nil {
 		fmt.Errorf("%v", err)
 	}
